@@ -1,7 +1,7 @@
 ---
 name: implement-spec
-description: "Implement the result of /to-spec and /to-tickets in code."
-disable-model-invocation: true
+description: >-
+  Execute an entire spec on an integration branch by coordinating implementer subagents across a ticket task graph, concluding with review. Use when the user invokes /implement-spec or requests implementing an entire multi-ticket spec.
 ---
 
 You have been provided a spec. This spec should have tickets associated with it, describing how to implement the spec.
@@ -24,16 +24,16 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 
 3. Create the integration branch. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 5 (a branch with no commits ahead of main can't open one), marked as closing the spec and tickets.
 
-4. Use **implementer subagents** to implement each ticket, each in its own worktree on its own branch. Each implementer subagent:
+4. Use **implementer subagents** (`invoke_subagent` with `TypeName: 'implementer'`) to implement each ticket, each in its own worktree on its own branch. Each implementer subagent:
    - confirms its worktree is based on the integration branch before starting, and resets onto it if not;
-   - calls the Skill tool with `tdd` to build the ticket;
+   - consult and apply the `tdd` skill (`.agents/skills/tdd/SKILL.md`) to build the ticket;
    - merges the integration branch tip into its own branch before reporting done
 
-5. Once an **implementer subagent** completes, merge its work to the integration branch with a **merger subagent**.
+5. Once an **implementer subagent** completes, merge its work to the integration branch using git merge commands via `run_command`.
 
 6. If this changes the **frontier** of available tickets, kick off more **implementer subagents** to work on the new tickets. This allows for maximum concurrency.
 
-7. Once all tickets are complete, call the Skill tool with `code-review` on the integration branch. Fix all issues raised by the code review in a single **implementer subagent**.
+7. Once all tickets are complete, consult and apply the `code-review` skill (`.agents/skills/code-review/SKILL.md`) on the integration branch. Fix all issues raised by the code review in a single **implementer subagent**.
 
 8. If a draft PR exists, mark it ready for review. Otherwise, resolve each ticket the way the issue tracker closes work, and report the integration branch.
 

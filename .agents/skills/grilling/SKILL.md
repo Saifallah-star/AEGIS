@@ -1,6 +1,7 @@
 ---
 name: grilling
-description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
+description: >-
+  Core interviewing primitive that maps decisions into a branching design tree, working the frontier one round of questions at a time. Reusable discipline powering grill-me, grill-with-docs, triage, and wayfinder.
 ---
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
