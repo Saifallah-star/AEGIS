@@ -1,29 +1,76 @@
-# Contributing
+# Contributing to Agentic-Driven Development
 
-## Before Starting
+Thank you for contributing to the **Agentic-Driven Development** repository! This project serves as a central hub, testing ground, and backlog for **AI Agent Skills, Autonomous Subagents, and Disciplined Engineering Workflows** designed for **Google Antigravity (`agy`) and the Gemini CLI**.
 
-- Read `AGENTS.md` and relevant documentation.
-- Inspect Git status before editing.
-- Define requirements and acceptance criteria.
-- Plan non-trivial changes before implementation.
+---
 
-## Development Workflow
+## 🧭 Guiding Principles
 
-1. Implement one focused task at a time.
-2. Add or update appropriate tests.
-3. Run relevant quality checks.
-4. Review the final Git diff.
-5. Report changes, test results, and remaining limitations.
+1. **Progressive Disclosure**: Skills must be lightweight at index time (`name` and `description` in YAML frontmatter), revealing deeper checklists, schemas, and templates only upon activation.
+2. **Deep Modules with Narrow Seams**: Whether developing code, skills, or agent definitions, encapsulate internal complexity behind simple, robust interfaces (`codebase-design`).
+3. **Disciplined Lifecycle Boundaries**: Development flows systematically through distinct phases:
+   `Triage / Alignment` ➔ `Specification & Ticket DAG` ➔ `TDD Construction` ➔ `Two-Axis Code Review` ➔ `PR & Retro`.
+4. **Honest, Reproducible Verification**: Never claim unverified test results or speculative bug fixes. Every fix must be proven with automated tests or reproduction runs.
 
-## Engineering Rules
+---
 
-- Keep frontend and backend responsibilities separate.
-- Avoid unnecessary dependencies and unrelated refactoring.
-- Validate untrusted input at system boundaries.
-- Update documentation when behavior or architecture changes.
-- Never commit secrets or overwrite user work without authorization.
-- Do not commit or push unless explicitly requested.
+## 🛠️ Contribution Areas
 
-## Definition of Done
+### 1. Adding or Refining a Skill (`.agents/skills/<skill-name>/`)
+- Every skill directory must contain a valid `SKILL.md` with:
+  ```yaml
+  ---
+  name: <skill-name>
+  description: >-
+    Action-oriented 3rd-person description of what the skill does and when to activate it.
+  ---
+  ```
+- Store detailed guides, templates, or scripts in co-located files within the skill directory (e.g. `mocking.md`, `tests.md`, `scripts/`).
+- Document newly added skills in both [`README.md`](README.md) and [`illustration.md`](illustration.md).
 
-A task is complete when acceptance criteria are satisfied, relevant checks have been run, documentation is updated where necessary, and the final changes have been reviewed.
+### 2. Enhancing Subagent Definitions (`.agents/agents/<agent-name>/`)
+- Subagents live in `.agents/agents/<name>/agent.md` with proper YAML frontmatter (`name`, `description`, `tools`, `subagent: true`, `model`, `skills`).
+- Each agent must specify:
+  - **Role & When to Use**: Concrete boundaries preventing duplicate investigations or tool misuse.
+  - **Lifecycle / ASCII Flow**: Step-by-step procedure the subagent follows.
+  - **Explicit Boundaries**: What the subagent is strictly prohibited from doing.
+  - **Required Output Schema**: Standardized handoff format.
+
+### 3. Specifications & Task Backlog (`specs/` & `tasks/`)
+- Complex features or skills should start with a specification in `specs/features/` using [`FEATURE_TEMPLATE.md`](specs/features/FEATURE_TEMPLATE.md).
+- Track upcoming proposals and skill audits in [`tasks/backlog.md`](tasks/backlog.md).
+
+---
+
+## 🔄 Agentic Development Workflow
+
+When contributing changes, follow the repository's native multi-agent workflow:
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                        Contribution Lifecycle                          │
+└────┬────────────┬─────────────┬─────────────┬────────────┬─────────────┘
+     │            │             │             │            │             │
+     ▼            ▼             ▼             ▼            ▼             ▼
+[triage-agent] [architect]  [researcher] [implementer]  [debugger]   [reviewer]
+Intake & Repro  Grill & DAG   Grounding    TDD Build    Hypothesis   2-Axis Gate
+```
+
+1. **Intake & Triage**: Use `triage-agent` or run `/triage` to reproduce reported bugs and write structured agent briefs (`AGENT-BRIEF.md`).
+2. **Alignment & Specs**: For non-trivial ideas, use `architect` with `/grill-with-docs` to eliminate unspoken assumptions, document ADRs, and produce tracer-bullet ticket DAGs (`to-tickets`).
+3. **Research**: Delegate substantial discovery and external API verification to `researcher` (`skills/research`) before modifying code.
+4. **Implementation**: Use `implementer` following strict Test-Driven Development (`tdd`): write the failing test first (Red), implement minimal logic (Green), and refactor across deep seams.
+5. **Debugging**: For tricky regressions or intermittent failures, use `debugger` (`diagnosing-bugs`) to isolate the root cause and verify stability with 50+ stress runs.
+6. **Review**: Submit diffs to `reviewer` for an independent two-axis review (**Standards** + **Spec**) to obtain an explicit `[APPROVE]` gate verdict before merging.
+
+---
+
+## 📋 Definition of Done (DoD)
+
+A contribution is ready to be merged when:
+- [ ] Acceptance criteria in the ticket or specification are fully met.
+- [ ] Frontmatter in skills or agents adheres to the Antigravity specification.
+- [ ] Targeted tests and validation checks have run and passed cleanly.
+- [ ] `AGENTS.md`, `README.md`, and `illustration.md` are updated if new skills or agents were introduced.
+- [ ] The git diff has been reviewed with 0 unaddressed `Critical` or `High` findings.
+- [ ] PR description follows the structured format generated by `/pr` (Mermaid visuals, proof, and blast radius).
