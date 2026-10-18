@@ -126,6 +126,40 @@ For complete diagrams, sequence charts, and real-world scenarios, consult [`illu
 
 ---
 
+## 🧪 Skill Quality, Verification & Automated Checks
+
+The repository includes automated quality tooling to ensure all skills and subagents stay healthy and conform to the Antigravity specification.
+
+### Automatic Pre-Commit Hook
+You don't need to remember to run checks manually. A Git pre-commit hook is installed in `.git/hooks/pre-commit`:
+- **When it runs**: It runs automatically at the exact moment you type `git commit`. It does **not** run on a background timer.
+- **What it does**: Git pauses your commit for 1–2 seconds to run `python3 scripts/validate_skills.py`:
+  - **If all checks pass (0 errors)**: The commit proceeds normally.
+  - **If an error is found**: Git aborts the commit, keeps your changes intact, and prints a clear guide explaining what failed and how to fix it.
+
+### What the Validator Checks
+The validation script (`scripts/validate_skills.py`) inspects:
+1. **YAML Frontmatter**: Verifies `name`, `description`, `tools`, and `subagent: true`.
+2. **Context Token Weight**: Calculates progressive disclosure token cost so skills don't bloat the AI's initial index context.
+3. **Vendor Syntax Scan**: Flags deprecated syntax or vendor-specific XML tags (such as `<thinking>` tags).
+4. **Dead Links**: Verifies that any local file referenced in markdown (like `[mocking.md](mocking.md)`) actually exists on disk.
+
+### Running Tools & Tests Manually
+You can run the checks and automated test suite manually anytime:
+
+```bash
+# Run the skill & agent quality validator
+python3 scripts/validate_skills.py
+
+# Run the automated unit test suite
+python3 -m unittest discover -s tests -v
+
+# Re-install git hooks on a fresh clone
+./scripts/install_hooks.sh
+```
+
+---
+
 ##  Active Backlog
 
 Check [`tasks/backlog.md`](tasks/backlog.md) for the active roadmap, including:
@@ -133,3 +167,4 @@ Check [`tasks/backlog.md`](tasks/backlog.md) for the active roadmap, including:
 - Multi-agent orchestration test fixtures
 - Specialized domain skills (database migrations, security scanning)
 - Subagent performance and token efficiency benchmarks
+
