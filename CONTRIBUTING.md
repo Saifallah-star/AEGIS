@@ -4,7 +4,7 @@ Thank you for contributing to the **Agentic-Driven Development** repository! Thi
 
 ---
 
-## 🧭 Guiding Principles
+##  Guiding Principles
 
 1. **Progressive Disclosure**: Skills must be lightweight at index time (`name` and `description` in YAML frontmatter), revealing deeper checklists, schemas, and templates only upon activation.
 2. **Deep Modules with Narrow Seams**: Whether developing code, skills, or agent definitions, encapsulate internal complexity behind simple, robust interfaces (`codebase-design`).
@@ -14,7 +14,7 @@ Thank you for contributing to the **Agentic-Driven Development** repository! Thi
 
 ---
 
-## 🛠️ Contribution Areas
+##  Contribution Areas
 
 ### 1. Adding or Refining a Skill (`.agents/skills/<skill-name>/`)
 - Every skill directory must contain a valid `SKILL.md` with:
@@ -42,7 +42,7 @@ Thank you for contributing to the **Agentic-Driven Development** repository! Thi
 
 ---
 
-## 🔄 Agentic Development Workflow
+##  Agentic Development Workflow
 
 When contributing changes, follow the repository's native multi-agent workflow:
 
@@ -65,7 +65,7 @@ Intake & Repro  Grill & DAG   Grounding    TDD Build    Hypothesis   2-Axis Gate
 
 ---
 
-## 📋 Definition of Done (DoD)
+##  Definition of Done (DoD)
 
 A contribution is ready to be merged when:
 - [ ] Acceptance criteria in the ticket or specification are fully met.

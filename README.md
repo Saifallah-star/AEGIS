@@ -17,7 +17,7 @@ The primary objective of this repository is to curate, maintain, test, and docum
 
 ---
 
-## 📂 Repository Structure
+##  Repository Structure
 
 ```
 ├── .agents/
