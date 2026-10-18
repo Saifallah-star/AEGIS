@@ -65,7 +65,7 @@ Intake & Repro  Grill & DAG   Grounding    TDD Build    Hypothesis   2-Axis Gate
 
 ---
 
-## 🧪 Automated Quality Validation & Git Hooks
+##  Automated Quality Validation & Git Hooks
 
 To make contributing effortless, quality verification is automated:
 
@@ -91,7 +91,7 @@ python3 -m unittest discover -s tests -v
 
 ---
 
-## 📋 Definition of Done (DoD)
+##  Definition of Done (DoD)
 
 A contribution is ready to be merged when:
 - [ ] Acceptance criteria in the ticket or specification are fully met.

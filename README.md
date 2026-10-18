@@ -126,7 +126,7 @@ For complete diagrams, sequence charts, and real-world scenarios, consult [`illu
 
 ---
 
-## 🧪 Skill Quality, Verification & Automated Checks
+##  Skill Quality, Verification & Automated Checks
 
 The repository includes automated quality tooling to ensure all skills and subagents stay healthy and conform to the Antigravity specification.
 
