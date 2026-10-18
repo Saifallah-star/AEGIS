@@ -7,12 +7,12 @@ This backlog tracks the ongoing development, curation, optimization, and testing
 ##  Active Initiatives
 
 ### 1. Skill Quality & Verification Tooling
-- [ ] Implement an automated validator script (`scripts/validate_skills.py`) to verify:
+- [x] Implement an automated validator script (`scripts/validate_skills.py`) to verify:
   - Correct YAML frontmatter formatting (`name`, `description`).
   - Absence of hardcoded tool syntax or deprecated vendor flags.
   - Valid internal markdown links (`[reference.md](reference.md)`).
-- [ ] Add pre-commit check to ensure skills conform to the Antigravity customization specification.
-- [ ] Measure token weight of skill descriptions to optimize context overhead.
+- [x] Add pre-commit check to ensure skills conform to the Antigravity customization specification.
+- [x] Measure token weight of skill descriptions to optimize context overhead.
 
 ### 2. Subagent Orchestration & Custom Agents
 - [ ] Define standardized agent personas and configurations for Antigravity's `define_subagent` tool:
