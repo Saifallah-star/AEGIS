@@ -21,9 +21,12 @@ This document describes the architectural model of the skills and autonomous sub
                ▼ Progressive Disclosure       ▼ Autonomous Dispatch
 ┌──────────────────────────────┐ ┌────────────────────────────┐
 │      .agents/skills/         │ │     Specialized Subagents  │
-│ • 20 Engineering Skills      │ │ • researcher (read-only)   │
-│ • 7 Productivity Skills      │ │ • implementer (TDD/build)  │
-│ • Supporting docs & scripts  │ │ • reviewer (2-axis audit)  │
+│ • 20 Engineering Skills      │ │ • triage-agent (preflight) │
+│ • 7 Productivity Skills      │ │ • architect (system design)│
+│ • Supporting docs & scripts  │ │ • researcher (read-only)   │
+│                              │ │ • implementer (TDD/build)  │
+│                              │ │ • debugger (root-cause/fix)│
+│                              │ │ • reviewer (2-axis audit)  │
 └──────────────────────────────┘ └────────────────────────────┘
 ```
 
@@ -41,11 +44,15 @@ In Antigravity, skills are designed to minimize context token usage:
 ## 3. Subagent Orchestration Patterns
 
 Antigravity supports spawning autonomous subagents using the `invoke_subagent` tool:
+- **`triage-agent`**: Evaluates incoming issues and external PRs, reproduces bugs with scripts, and authors structured `AGENT-BRIEF.md` briefs.
+- **`architect`**: Grills requirements relentlessly (`grill-with-docs`), records domain models/ADRs, designs deep interfaces (`codebase-design`), and decomposes specs into ticket DAGs (`to-tickets`).
 - **`researcher`**: Used before implementation to investigate code, search documentation, and explore third-party APIs without modifying files.
-- **`implementer`**: Used to build specific tickets within an integration branch or worktree, executing the Red-Green-Refactor loop (`tdd`).
+- **`implementer`**: Used to build specific tickets within an integration branch or worktree, executing the Red-Green-Refactor loop (`tdd`) and deep module design.
+- **`debugger`**: Executes the 6-phase scientific debugging loop (`diagnosing-bugs`) to isolate flaky tests, race conditions, and tricky defects with regression stress verification.
 - **`reviewer`**: Runs in parallel to review diffs along two orthogonal axes:
   - *Standards Axis*: Adherence to repository patterns, cleanliness, and code smell avoidance.
   - *Spec Axis*: Verification that acceptance criteria and edge cases are satisfied.
+  - *Gate Verdict*: Concludes with explicit `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`.
 
 ---
 

@@ -10,9 +10,12 @@
 - Never claim unverified test results.
 
 ## Delegation
-- Use `researcher` for substantial read-only exploration.
-- Use `implementer` for clearly scoped code changes.
-- Use `reviewer` for independent review of meaningful changes.
+- Use `triage-agent` for evaluating issues/PRs, reproduction, and writing agent briefs.
+- Use `architect` for requirements grilling, ADRs, system specs, and ticket DAG decomposition.
+- Use `researcher` for substantial read-only exploration and documentation lookup.
+- Use `implementer` for clearly scoped code changes and test-driven development (`tdd`).
+- Use `debugger` for isolating hard/flaky bugs, hypothesis testing, and regression proofs.
+- Use `reviewer` for independent two-axis review (Standards + Spec) of diffs.
 - Keep trivial tasks in the primary agent.
 - Parallelize only independent work with clear file ownership.
 - Avoid duplicate investigations and redundant agent reports.

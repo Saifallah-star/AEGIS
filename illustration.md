@@ -109,48 +109,143 @@ flowchart TD
 
 ## 3. Antigravity Subagent Orchestration
 
-Antigravity executes complex workflows with autonomous specialized subagents, keeping the primary conversation focused and context tokens lean:
+Antigravity executes complex engineering workflows using autonomous specialized subagents, keeping the primary conversation context lean and focused.
+
+### The 6 Specialized Subagents Roster
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                        Primary Antigravity Agent                       │
+└────┬────────────┬─────────────┬─────────────┬────────────┬─────────────┘
+     │            │             │             │            │             │
+     ▼            ▼             ▼             ▼            ▼             ▼
+┌──────────┐ ┌──────────┐ ┌──────────┐ ┌───────────┐ ┌──────────┐ ┌──────────┐
+│  triage  │ │architect │ │researcher│ │implementer│ │ debugger │ │ reviewer │
+│  -agent  │ │          │ │          │ │           │ │          │ │          │
+└──────────┘ └──────────┘ └──────────┘ └───────────┘ └──────────┘ └──────────┘
+```
+
+| Subagent | Type / Mode | Key Bound Skills | Primary Responsibility |
+| :--- | :--- | :--- | :--- |
+| **`triage-agent`** | Pre-Flight & Triage | `triage` | Ingests issues/PRs, runs reproduction scripts, and writes actionable briefs |
+| **`architect`** | Design & Planning | `grill-with-docs`, `codebase-design`, `to-spec`, `to-tickets` | Eliminates tacit assumptions, records ADRs, specifies deep interfaces, and outputs ticket DAGs |
+| **`researcher`** | Read-Only Discovery | `research` | Traces codebase execution paths and reads official documentation with source citations |
+| **`implementer`** | TDD & Construction | `tdd`, `codebase-design` | Writes tests first (Red), implements minimal code (Green), and refactors across deep seams |
+| **`debugger`** | Root-Cause Analysis | `diagnosing-bugs` | 6-phase scientific debugging loop for flaky tests, race conditions, and tricky defects |
+| **`reviewer`** | Two-Axis Gatekeeper | `code-review` | Orthogonal review on Standards (patterns/smells) and Spec (acceptance/edge cases) with gate verdicts |
+
+---
+
+### End-to-End Subagent Interaction Sequence
 
 ```mermaid
 sequenceDiagram
     autonumber
     actor Human as Developer
     participant Main as Antigravity Primary Agent
+    participant Triage as Subagent: triage-agent
+    participant Architect as Subagent: architect
     participant Researcher as Subagent: researcher
     participant Implementer as Subagent: implementer
+    participant Debugger as Subagent: debugger
     participant Reviewer as Subagent: reviewer
 
-    Human->>Main: /implement-spec
-    Main->>Main: Read Spec & Ticket DAG (.scratch/ or Tracker)
+    Human->>Main: Incoming Feature or Bug Report
     
+    rect rgb(240, 240, 255)
+    note over Main,Triage: Phase 1: Intake & Triage
+    Main->>Triage: Verify bug reproduction & scope
+    Triage-->>Main: State: ready-for-agent + AGENT-BRIEF.md
+    end
+
+    rect rgb(255, 250, 240)
+    note over Main,Architect: Phase 2: Design & Spec Decomposition
+    Main->>Architect: Grill requirements & generate ticket DAG
+    Architect-->>Main: spec.md + ADR-001 + Ticket DAG
+    end
+
     rect rgb(240, 248, 255)
-    note over Main,Researcher: Exploration & Grounding
-    Main->>Researcher: invoke_subagent(TypeName="researcher", prompt="Inspect API seams & docs")
-    Researcher-->>Main: Return concise findings & citations
+    note over Main,Researcher: Phase 3: Targeted Research
+    Main->>Researcher: Inspect API seams & external library docs
+    Researcher-->>Main: Confirmed facts & file citations
     end
 
     Main->>Main: Create git integration branch
 
     rect rgb(245, 255, 245)
-    note over Main,Implementer: Concurrent Ticket Execution
-    loop Across Ready Ticket Frontier
-        Main->>Implementer: invoke_subagent(TypeName="implementer", prompt="Build Ticket 01 using /tdd")
-        Implementer->>Implementer: Write failing test (Red)
-        Implementer->>Implementer: Implement minimal logic (Green)
-        Implementer->>Implementer: Refactor & verify
-        Implementer-->>Main: Ticket 01 complete & tested
+    note over Main,Implementer: Phase 4: Concurrent TDD Implementation
+    loop Across Ready Ticket DAG
+        Main->>Implementer: Build Ticket using /tdd & deep modules
+        Implementer->>Implementer: Red (failing test) -> Green -> Refactor
+        opt If intermittent failure occurs
+            Implementer->>Debugger: Isolate root cause with hypothesis loop
+            Debugger-->>Implementer: Verified fix + 50-run stress proof
+        end
+        Implementer-->>Main: Ticket complete & verified
         Main->>Main: Merge to integration branch
     end
     end
 
     rect rgb(255, 245, 245)
-    note over Main,Reviewer: Two-Axis Quality Gate
-    Main->>Reviewer: invoke_subagent(TypeName="reviewer", prompt="Review diff against spec & standards")
-    Reviewer-->>Main: Report findings (Spec compliance + Fowler smells)
+    note over Main,Reviewer: Phase 5: Two-Axis Quality Gate
+    Main->>Reviewer: Review diff against Standards & Spec
+    Reviewer-->>Main: Gate Verdict: [APPROVE] or [REQUEST_CHANGES]
     end
 
-    Main->>Human: Summary, PR description, and completed branch
+    Main->>Human: Summary, PR draft, and verified integration branch
 ```
+
+---
+
+### Detailed Agent Profiles & When to Use
+
+#### 1. `triage-agent`
+- **When to Use**: Whenever processing incoming GitHub/GitLab issues, user bug reports, or external PRs. Use it to determine reproducibility and filter noise before wasting engineering cycles.
+- **Tools**: `view_file`, `grep_search`, `run_command`, `write_to_file`, `replace_file_content`.
+- **Workflow**:
+  ```
+  Incoming Issue ──> Reproduce Script ──> State Evaluation ──> AGENT-BRIEF.md
+  ```
+
+#### 2. `architect`
+- **When to Use**: When initiating new features, services, or multi-ticket refactors with ambiguous boundaries. Relentlessly grills assumptions and writes specifications.
+- **Tools**: `view_file`, `grep_search`, `write_to_file`, `replace_file_content`, `run_command`.
+- **Workflow**:
+  ```
+  Grilling Interview ──> GLOSSARY & ADRs ──> Deep Interfaces ──> Ticket DAG
+  ```
+
+#### 3. `researcher`
+- **When to Use**: Read-only exploration before writing code. Locates entry points, analyzes cross-cutting call trees, and investigates external documentation.
+- **Tools**: `view_file`, `grep_search`, `search_web`, `read_url_content`.
+- **Workflow**:
+  ```
+  Research Goal ──> Codebase & Web Search ──> Call Graph Trace ──> Cited Findings
+  ```
+
+#### 4. `implementer`
+- **When to Use**: Building single tickets or features where requirements and file ownership are clear. Follows strict test-driven development.
+- **Tools**: `view_file`, `grep_search`, `replace_file_content`, `write_to_file`, `run_command`.
+- **Workflow**:
+  ```
+  Scope Check ──> Failing Test (Red) ──> Smallest Code (Green) ──> Seam Refactor
+  ```
+
+#### 5. `debugger`
+- **When to Use**: When tests are flaky, CI builds fail intermittently, or complex defects defy immediate inspection. Never relies on speculative fixes.
+- **Tools**: `view_file`, `grep_search`, `replace_file_content`, `write_to_file`, `run_command`.
+- **Workflow**:
+  ```
+  Automated Repro ──> Isolation ──> Hypotheses ──> Telemetry ──> Verified Fix
+  ```
+
+#### 6. `reviewer`
+- **When to Use**: Prior to opening or merging pull requests, and after each implementer subagent completes a ticket.
+- **Tools**: `view_file`, `grep_search`, `run_command`.
+- **Workflow**:
+  ```
+  Diff Audit ──> Standards Axis + Spec Axis ──> Verification ──> Gate Verdict
+  ```
 
 ---
 
