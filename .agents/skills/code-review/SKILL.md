@@ -22,9 +22,9 @@ The issue tracker should have been provided to you. If not, tell the user to run
    - Absolute ban on conversational apologies (*"I apologize"*, *"I am sorry"*).
    - Factual, plain-English critique: lead with what is broken, divergent, or risky before noting what works.
 4. **Severity Taxonomy**: Every finding must be classified as:
-   - 🔴 `[BLOCKER]`: Hard spec violation, missing required capability, ADR invariant violation, or regression.
-   - 🟡 `[MAJOR]`: Logic shortcut, incomplete data model, missing validation/edge case handling, or notable Fowler smell.
-   - 🟢 `[NIT]`: Scope creep, minor naming or typing inconsistency, or subjective stylistic recommendation.
+   - `[BLOCKER]`: Hard spec violation, missing required capability, ADR invariant violation, or regression.
+   - `[MAJOR]`: Logic shortcut, incomplete data model, missing validation/edge case handling, or notable Fowler smell.
+   - `[NIT]`: Scope creep, minor naming or typing inconsistency, or subjective stylistic recommendation.
 
 ---
 

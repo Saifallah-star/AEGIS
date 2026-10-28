@@ -446,11 +446,11 @@ def format_terminal_report(all_issues: List[Issue], stats: Dict[str, Any], root_
         name = s_stats["name"] or skill_path.parent.name
 
         if s_errs:
-            status = f"{COLOR_RED}❌ FAIL{COLOR_RESET}"
+            status = f"{COLOR_RED}[FAIL]{COLOR_RESET}"
         elif s_warns:
-            status = f"{COLOR_YELLOW}⚠️ WARN{COLOR_RESET}"
+            status = f"{COLOR_YELLOW}[WARN]{COLOR_RESET}"
         else:
-            status = f"{COLOR_GREEN}✅ PASS{COLOR_RESET}"
+            status = f"{COLOR_GREEN}[PASS]{COLOR_RESET}"
 
         tokens_str = f"~{s_stats['token_est']}"
         lines.append(f"{status:<17} {name:<28} {tokens_str:<10} {rel_path}")
@@ -470,11 +470,11 @@ def format_terminal_report(all_issues: List[Issue], stats: Dict[str, Any], root_
             name = a_stats["name"] or agent_path.parent.name
 
             if a_errs:
-                status = f"{COLOR_RED}❌ FAIL{COLOR_RESET}"
+                status = f"{COLOR_RED}[FAIL]{COLOR_RESET}"
             elif a_warns:
-                status = f"{COLOR_YELLOW}⚠️ WARN{COLOR_RESET}"
+                status = f"{COLOR_YELLOW}[WARN]{COLOR_RESET}"
             else:
-                status = f"{COLOR_GREEN}✅ PASS{COLOR_RESET}"
+                status = f"{COLOR_GREEN}[PASS]{COLOR_RESET}"
 
             tools_str = str(a_stats["tools_count"])
             skills_str = str(a_stats["skills_count"])

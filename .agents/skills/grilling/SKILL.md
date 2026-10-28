@@ -11,15 +11,15 @@ Work the tree in **rounds**. The **frontier** is every decision whose prerequisi
 Format a round like so:
 
 ```
-❓ **Q1** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
+[?] **Q1** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
 
-➡️ <your recommended answer>
+--> <your recommended answer>
 
 ---
 
-❓ **Q2** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
+[?] **Q2** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
 
-➡️ <your recommended answer>
+--> <your recommended answer>
 ```
 
 Word each question so "yes" accepts your recommended answer.

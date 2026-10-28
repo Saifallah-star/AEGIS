@@ -9,7 +9,7 @@ Thank you for contributing to the **Agentic-Driven Development** repository! Thi
 1. **Progressive Disclosure**: Skills must be lightweight at index time (`name` and `description` in YAML frontmatter), revealing deeper checklists, schemas, and templates only upon activation.
 2. **Deep Modules with Narrow Seams**: Whether developing code, skills, or agent definitions, encapsulate internal complexity behind simple, robust interfaces (`codebase-design`).
 3. **Disciplined Lifecycle Boundaries**: Development flows systematically through distinct phases:
-   `Triage / Alignment` ➔ `Specification & Ticket DAG` ➔ `TDD Construction` ➔ `Two-Axis Code Review` ➔ `PR & Retro`.
+   `Triage / Alignment` -> `Specification & Ticket DAG` -> `TDD Construction` -> `Two-Axis Code Review` -> `PR & Retro`.
 4. **Honest, Reproducible Verification**: Never claim unverified test results or speculative bug fixes. Every fix must be proven with automated tests or reproduction runs.
 
 ---

@@ -59,14 +59,14 @@ stage() {
 # say "..." prints a plain instruction line.
 say()  { printf '  %s\n' "$1"; }
 # step "..." is a numbered-feeling action the human takes in the browser.
-step() { printf '  %s•%s %s\n' "$BLUE" "$RESET" "$1"; }
+step() { printf '  %s*%s %s\n' "$BLUE" "$RESET" "$1"; }
 note() { printf '  %s%s%s\n' "$DIM" "$1" "$RESET"; }
-warn() { printf '  %s⚠ %s%s\n' "$YELLOW" "$1" "$RESET"; }
+warn() { printf '  %s[!] %s%s\n' "$YELLOW" "$1" "$RESET"; }
 
 # open_url URL opens it in the human's browser, cross-platform incl. WSL.
 open_url() {
   local url="$1"
-  printf '  %s↗ opening%s %s\n' "$GREEN" "$RESET" "$url"
+  printf '  %s-> opening%s %s\n' "$GREEN" "$RESET" "$url"
   { if   command -v wslview     >/dev/null 2>&1; then wslview "$url"
     elif command -v explorer.exe >/dev/null 2>&1; then explorer.exe "$url"
     elif command -v xdg-open    >/dev/null 2>&1; then xdg-open "$url"
@@ -147,7 +147,7 @@ write_env() {
   rm -f "$tmp"
   printf -v "$key" '%s' "$value"
   WRITTEN_ENV+=("$key")
-  printf '  %s✓ wrote%s %s → %s\n' "$GREEN" "$RESET" "$key" "$ENV_FILE"
+  printf '  %s[OK] wrote%s %s -> %s\n' "$GREEN" "$RESET" "$key" "$ENV_FILE"
 }
 
 # set_secret NAME VALUE sets a GitHub Actions repo secret via gh. Falls back
@@ -157,7 +157,7 @@ set_secret() {
   if command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
     if printf '%s' "$value" | gh secret set "$name" >/dev/null 2>&1; then
       WRITTEN_SECRET+=("$name")
-      printf '  %s✓ set%s GitHub secret %s\n' "$GREEN" "$RESET" "$name"
+      printf '  %s[OK] set%s GitHub secret %s\n' "$GREEN" "$RESET" "$name"
       return
     fi
   fi
@@ -170,7 +170,7 @@ set_var() {
   local name="$1" value="$2"
   if command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
     if gh variable set "$name" --body "$value" >/dev/null 2>&1; then
-      printf '  %s✓ set%s GitHub variable %s\n' "$GREEN" "$RESET" "$name"
+      printf '  %s[OK] set%s GitHub variable %s\n' "$GREEN" "$RESET" "$name"
       return
     fi
   fi
@@ -181,7 +181,7 @@ set_var() {
 # finish clears, then shows a closing summary of everything configured.
 finish() {
   _clear
-  printf '\n%s%s  ✓ Setup complete%s\n' "$BOLD" "$GREEN" "$RESET"
+  printf '\n%s%s  [OK] Setup complete%s\n' "$BOLD" "$GREEN" "$RESET"
   (( ${#WRITTEN_ENV[@]} ))    && note "wrote ${#WRITTEN_ENV[@]} value(s) to $ENV_FILE: ${WRITTEN_ENV[*]}"
   (( ${#WRITTEN_SECRET[@]} )) && note "set ${#WRITTEN_SECRET[@]} GitHub secret(s): ${WRITTEN_SECRET[*]}"
   if (( ${#SKIPPED[@]} )); then

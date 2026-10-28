@@ -35,7 +35,7 @@ In **Antigravity (`agy`)**, skills are modular packages of procedures, patterns,
 - **The Elephant (Persistent Context)**: High-context session holding the repository mental model, domain glossary, and operational constraints. Operates under a **strict No-Code rule** during ideation, grilling, and specification authoring.
 - **The Goldfish (Zero-Context Critics)**: Stateless, ephemeral subagents spawned with zero conversation history to stress-test designs cold and prevent confirmation bias.
 - **Deep Modules & Seams**: Based on John Ousterhout's *Philosophy of Software Design* ([`codebase-design`](.agents/skills/codebase-design/SKILL.md)): simple interfaces hiding complex implementations, with tests pinned to public boundaries.
-- **Strict Test-Driven Development**: Work is executed test-first (Red $\rightarrow$ Green $\rightarrow$ Refactor) across vertical slices ([`tdd`](.agents/skills/tdd/SKILL.md)).
+- **Strict Test-Driven Development**: Work is executed test-first (Red -> Green -> Refactor) across vertical slices ([`tdd`](.agents/skills/tdd/SKILL.md)).
 - **Two-Axis Quality Gate**: Diff evaluation separating coding standards from spec adherence with AST drift detection ([`code-review`](.agents/skills/code-review/SKILL.md)), with all reports saved to `docs/reviews/`.
 
 ### Progressive Disclosure Model
@@ -75,7 +75,7 @@ flowchart TD
    - Builds `GLOSSARY.md` and records immutable ADRs in `docs/adr/`.
    - Enforces **Rule 13 Architectural Neutrality**: presents up to 3 defensible options with concrete trade-offs and failure modes without pre-selecting a default.
 3. **Living Spec Synthesis ([`/to-spec`](.agents/skills/to-spec/SKILL.md))**:
-   - Non-interactively synthesizes the problem statement, user stories, interface contracts, and testing seams into `docs/designs/<feature>.md`.
+   - Synthesizes the problem statement, user stories, interface contracts, and testing seams into `docs/designs/<feature>.md`.
 4. **The Goldfish Review Gate (`/egm-review`)**:
    - Spawns completely stateless subagents with zero conversation memory to review the spec cold.
    - Runs comprehension paraphrasing and hostile edge-case probing to eliminate confirmation bias.
@@ -87,7 +87,7 @@ flowchart TD
 7. **Concurrent Worktree TDD Implementation ([`/implement-spec`](.agents/skills/implement-spec/SKILL.md), [`/tdd`](.agents/skills/tdd/SKILL.md))**:
    - Creates a git integration branch.
    - Launches parallel `implementer` subagents in isolated Git worktrees.
-   - Drives strict Red $\rightarrow$ Green $\rightarrow$ Refactor loops on public seams.
+   - Drives strict Red -> Green -> Refactor loops on public seams.
 8. **Two-Axis Code Review with AST Drift Detection ([`/code-review`](.agents/skills/code-review/SKILL.md))**:
    - Runs parallel read-only subagents on the diff:
      - **Standards Axis**: 12 Fowler smells and repository patterns.
@@ -106,15 +106,15 @@ flowchart TD
 Antigravity executes complex workflows using specialized autonomous subagents to keep the primary context lean:
 
 ```
-┌────────────────────────────────────────────────────────────────────────┐
-│                        Primary Antigravity Agent                       │
-└────┬────────────┬─────────────┬─────────────┬────────────┬─────────────┘
-     │            │             │             │            │             │
-     ▼            ▼             ▼             ▼            ▼             ▼
-┌──────────┐ ┌──────────┐ ┌──────────┐ ┌───────────┐ ┌──────────┐ ┌──────────┐
-│  triage  │ │architect │ │researcher│ │implementer│ │ debugger │ │ reviewer │
-│  -agent  │ │          │ │          │ │           │ │          │ │          │
-└──────────┘ └──────────┘ └──────────┘ └───────────┘ └──────────┘ └──────────┘
++------------------------------------------------------------------------+
+|                        Primary Antigravity Agent                       |
++----+------------+-------------+-------------+------------+-------------+
+     |            |             |             |            |             |
+     v            v             v             v            v             v
++----------+ +----------+ +----------+ +-----------+ +----------+ +----------+
+|  triage  | |architect | |researcher| |implementer| | debugger | | reviewer |
+|  -agent  | |          | |          | |           | |          | |          |
++----------+ +----------+ +----------+ +-----------+ +----------+ +----------+
 ```
 
 | Subagent | Role | Bound Skills | When to Use |
@@ -231,28 +231,28 @@ sequenceDiagram
 ## 5. In-Depth Skill Breakdown
 
 ### Phase 1: Exploration, Alignment & Triage
-* **`ask-matt`**: Workflow router that evaluates context windows and directs you to the optimal skill.
-* **`triage`**: 5-state machine for incoming bug reports and issues. Produces `AGENT-BRIEF.md`.
-* **`grill-with-docs`**: Socratic interview that maps requirements into a decision tree, creating `GLOSSARY.md` and immutable ADRs (`docs/adr/`). Enforces Rule 13 neutrality on architectural forks.
+- **`ask-matt`**: Workflow router that evaluates context windows and directs you to the optimal skill.
+- **`triage`**: 5-state machine for incoming bug reports and issues. Produces `AGENT-BRIEF.md`.
+- **`grill-with-docs`**: Socratic interview that maps requirements into a decision tree, creating `GLOSSARY.md` and immutable ADRs (`docs/adr/`). Enforces Rule 13 neutrality on architectural forks.
 
 ### Phase 2: Specification & The Goldfish Gate
-* **`to-spec`**: Synthesizes consensus into `docs/designs/<feature>.md` with problem statement, user stories, contracts, and seams.
-* **`egm-review`**: Zero-context Goldfish subagents audit the spec cold across 5 phases (Initial Zoom Out, Comprehension, Critic, Intermediate Zoom Out, Implementation Readiness).
-* **`egm-resolve`**: Resolves feedback using evidence-backed taxonomy (`PROPOSE FIX`, `CONTEST`, `ESCALATE`, `DECLINE`).
+- **`to-spec`**: Synthesizes consensus into `docs/designs/<feature>.md` with problem statement, user stories, contracts, and seams.
+- **`egm-review`**: Zero-context Goldfish subagents audit the spec cold across 5 phases (Initial Zoom Out, Comprehension, Critic, Intermediate Zoom Out, Implementation Readiness).
+- **`egm-resolve`**: Resolves feedback using evidence-backed taxonomy (`PROPOSE FIX`, `CONTEST`, `ESCALATE`, `DECLINE`).
 
 ### Phase 3: Task Decomposition & Worktree TDD
-* **`to-tickets`**: Converts verified specs into tracer-bullet tickets with blocking edges.
-* **`implement-spec`**: Spawns parallel `implementer` subagents across ready DAG tickets in isolated Git worktrees.
-* **`tdd`**: Strict Red $\rightarrow$ Green $\rightarrow$ Refactor loop on pre-agreed seams.
+- **`to-tickets`**: Converts verified specs into tracer-bullet tickets with blocking edges.
+- **`implement-spec`**: Spawns parallel `implementer` subagents across ready DAG tickets in isolated Git worktrees.
+- **`tdd`**: Strict Red -> Green -> Refactor loop on pre-agreed seams.
 
 ### Phase 4: Quality Gate, Delivery & Continuous Audit
-* **`code-review`**: Two-axis independent review:
+- **`code-review`**: Two-axis independent review:
   - **Standards**: Repo conventions and 12 Fowler smells.
   - **Spec**: Acceptance criteria, ADR invariants, and AST drift detection (Missing Features, Incomplete Models, Logic Shortcuts, Architectural Divergence).
   - Automatically creates and writes reports to `docs/reviews/{YYYY-MM-DD}_{target}_review.md`.
-* **`pr`**: Produces high-signal pull requests with proof, blast radius, and one-way/two-way door analysis.
-* **`egm-drift-report`**: AST-based continuous consistency scanner comparing live code against design docs and ADRs.
-* **`retro`**: Retrospective closing the loop by updating `AGENTS.md`, pre-commit hooks, and linter checks.
+- **`pr`**: Produces high-signal pull requests with proof, blast radius, and one-way/two-way door analysis.
+- **`egm-drift-report`**: AST-based continuous consistency scanner comparing live code against design docs and ADRs.
+- **`retro`**: Retrospective closing the loop by updating `AGENTS.md`, pre-commit hooks, and linter checks.
 
 ---
 
