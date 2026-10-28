@@ -3,8 +3,8 @@
 A dedicated catalog and backlog for **AI Agent Skills, Subagent Orchestrations, and Autonomous Engineering Workflows** built for **Google Antigravity (`agy`) and Gemini CLI**.
 
 This repository combines two complementary engineering methodologies:
-- **Matt Pocock End-to-End Execution Framework**: Deep modules, test-driven development (TDD), tracer-bullet ticket DAGs, parallel Git worktrees, and two-axis code reviews.
-- **Google Elephant-Goldfish Model (EGM)**: Spec-first design with a strict No-Code elephant session, zero-context Goldfish adversarial reviews (`/egm-review`), evidence-backed triage (`/egm-resolve`), and post-merge AST drift detection (`/egm-drift-report`).
+- [**Matt Pocock End-to-End Execution Framework**](https://github.com/mattpocock/skills): Deep modules, test-driven development (TDD), tracer-bullet ticket DAGs, parallel Git worktrees, and two-axis code reviews.
+- [**Google Elephant-Goldfish Model (EGM)**](https://github.com/google/elephant-goldfish-model): Spec-first design with a strict No-Code elephant session, zero-context Goldfish adversarial reviews (`/egm-review`), evidence-backed triage (`/egm-resolve`), and post-merge AST drift detection (`/egm-drift-report`).
 
 ---
 
