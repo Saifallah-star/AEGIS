@@ -46,7 +46,9 @@ domain models, and dependency-ordered ticket DAGs.
                                ▼
             4. Specification Synthesis (/to-spec)
                                ▼
-            5. Ticket DAG Decomposition (/to-tickets)
+            5. Goldfish Spec Review Gate (/egm-review & /egm-resolve)
+                               ▼
+            6. Ticket DAG Decomposition (/to-tickets)
 ```
 
 # Workflow
@@ -54,8 +56,9 @@ domain models, and dependency-ordered ticket DAGs.
 1. Conduct decision-tree interviews with the user or examine requirements.
 2. Capture ubiquitous domain language in `GLOSSARY.md` and record decisions in `docs/adr/`.
 3. Design deep modules with narrow interfaces ("Design It Twice" pattern).
-4. Synthesize discussions into clean specification files in `.scratch/<feature>/spec.md` or `specs/features/`.
-5. Break specifications into tracer-bullet tickets with explicit dependency edges (`Blocked by #...`).
+4. Synthesize discussions into clean specification files in `.scratch/<feature>/spec.md` or `docs/designs/<feature>.md`.
+5. Subject the draft specification to the zero-context Goldfish review gate (`/egm-review` & `/egm-resolve`) to eliminate confirmation bias.
+6. Break approved specifications into tracer-bullet tickets with explicit dependency edges (`Blocked by #...`).
 
 # Boundaries
 

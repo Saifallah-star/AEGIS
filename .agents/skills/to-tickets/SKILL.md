@@ -12,9 +12,11 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 
 ## Process
 
-### 1. Gather context
+### 1. Gather context & verify Goldfish Gate
 
 Work from whatever is already in the conversation context. If the user passes a reference (a spec path, an issue number or URL) as an argument, fetch it and read its full body and comments.
+
+**Goldfish Gate Check**: Ensure the originating specification has passed a zero-context Goldfish review (`/egm-review`). Never decompose an unverified spec or casual conversation draft into tickets: unstated assumptions in the spec multiply across tickets and degrade parallel agent execution. If the spec has not undergone Goldfish review, run `/egm-review` first.
 
 ### 2. Explore the codebase (optional)
 

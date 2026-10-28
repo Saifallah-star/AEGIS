@@ -10,13 +10,27 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 
 ## Process
 
-1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching.
+1. **Explore the repo**: Understand the current state of the codebase. Use the project's domain glossary (`GLOSSARY.md`) vocabulary throughout the spec, and respect any ADRs (`docs/adr/`) in the area you're touching.
 
-2. Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
+2. **Identify test seams**: Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. The fewer seams across the codebase, the better - the ideal number is one. Confirm with the user that these seams match their expectations.
 
-Check with the user that these seams match their expectations.
+3. **Draft the specification**: Write the complete draft spec using the template below. Save it to `docs/designs/<feature-slug>.md` (or `.scratch/<feature-slug>/spec.md`).
 
-3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
+4. **The Goldfish Review Gate (`/egm-review`)**:
+   Do **not** rely on casual conversational sign-off. Models that draft a spec develop confirmation bias. Stress-test the draft cold:
+   - Spawn a zero-context subagent (or invoke `/egm-review`) with zero conversation history to audit the saved spec file.
+   - The Goldfish performs:
+     - **Comprehension Test**: Paraphrases the system architecture back to verify the spec is 100% self-contained and clear without external context.
+     - **Adversarial Critique & Implementation Readiness**: Probes for unstated assumptions, logical contradictions, incomplete data models, missing error handling, and vague completion criteria.
+   - **Triage Feedback Taxonomy (`/egm-resolve`)**:
+     Categorize every finding strictly using EGM's structured taxonomy:
+     - `PROPOSE FIX`: Propose concrete spec modifications and apply approved edits directly to the spec.
+     - `CONTEST`: Reject a finding only when citing verified code evidence or existing ADR invariants.
+     - `ESCALATE`: Flag genuine architectural forks or business trade-offs to the human.
+     - `DECLINE`: Reject out-of-scope nits with explicit justification.
+
+5. **Publish to Issue Tracker**:
+   Once the spec passes the Goldfish gate (all blockers and majors resolved), publish the verified spec to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage. Proceed to `/to-tickets`.
 
 <spec-template>
 

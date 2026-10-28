@@ -80,3 +80,18 @@ You win twice: fewer tokens, and a sharper hook for the agent to hang its thinki
 - The **environment** is a source of truth too (`package.json` scripts, config files, the directory layout, `--help` output), and a document that restates it is a **cache**: a copy of a lookup, earning its load only when the lookup is expensive. Cache what the agent cannot find by looking: the unwritten convention, the reason behind a choice, the gotcha no config confesses. Leave the one-file, one-command lookups to the environment, where they cannot go stale.
 - Check every line for **relevance**: does it still bear on what the document does? A line loses relevance by never bearing on the task (mere exposition, or a branch that should be disclosed) or by going stale as the behaviour or world it describes changes. Shorter documents are easier to keep relevant. Without a pruning discipline the default fate is **sediment**: stale layers that settle because adding feels safe and removing feels risky, until you must core down through them to find what is still live.
 - Hunt **no-ops** sentence by sentence: an instruction the model already obeys by default pays load to say nothing. The test (does it change behaviour versus the default?) is model-relative, not reader-relative: two people disagreeing about a no-op disagree about the default, and settle it by running the document, not by debate. When a sentence fails, delete the whole sentence rather than trim words from it. The test also grades leading words: a word too weak to beat the default (_be thorough_ when the agent is already thorough-ish) is a no-op, and the fix is a stronger word (_relentless_), not a different technique.
+
+## Tone & Persona Invariants (Anti-Glazing & Neutrality)
+
+When authoring agent steering rules, instructions, or interaction prompts, enforce EGM-style rigor:
+
+1. **Anti-Sycophancy (Anti-Glazing)**:
+   - **Banned Adjectives (No Flattery)**: Eliminate sycophantic praise. Strictly ban flattering adjectives (*"brilliant"*, *"great idea"*, *"perfect"*, *"excellent"*, *"spot-on"*). Praise adds no informational value and causes confirmation bias.
+   - **Banned Apologies**: Strictly prohibit polite conversational apologies (*"I apologize"*, *"I am sorry"*). When challenged or corrected, explain the revised technical logic or trade-offs directly.
+   - **Plain-English Standard**: Direct, jargon-free explanations. Ban promotional marketing speak (*"seamless"*, *"robust"*, *"blazingly fast"*) and decorative adverbs (*"seamlessly"*, *"effortlessly"*, *"obviously"*).
+   - **Critique First**: Lead with what is broken, missing, or risky before affirming merits.
+
+2. **Architectural Neutrality (Rule 13)**:
+   - The human remains the architectural owner.
+   - When presenting design decisions or architectural forks, outline up to 3 defensible options with concrete mechanisms, trade-offs, and failure modes.
+   - Do not pre-select or lead the human toward a default unless an explicit recommendation is requested.

@@ -16,7 +16,8 @@ skills:
 
 Review code changes independently. Evaluate proposed diffs along two orthogonal
 axes: **Standards** (code cleanliness, repo conventions, Fowler smells) and
-**Spec** (acceptance criteria, edge cases, requirement adherence).
+**Spec** (acceptance criteria, edge cases, ADR invariants, and AST drift detection).
+Persists structured reports under `docs/reviews/`.
 
 ## When to Use
 
@@ -37,15 +38,17 @@ axes: **Standards** (code cleanliness, repo conventions, Fowler smells) and
         ┌──────────────────────┴──────────────────────┐
         ▼                                             ▼
   [Standards Axis]                               [Spec Axis]
-  - Repository Conventions                      - Requirements Met
-  - Modularity & Smells                         - Edge Cases & Errors
-  - Security & Cleanliness                      - Test Coverage
+  - Repository Conventions                      - Spec & ADR Adherence
+  - Modularity & Fowler Smells                  - AST Drift Detection
+  - Security & Cleanliness                      - Missing Features / Shortcuts
         │                                             │
         └──────────────────────┬──────────────────────┘
                                ▼
             2. Run Read-Only Verification Checks
                                ▼
-            3. Issue Explicit Verdict:
+            3. Persist Report to docs/reviews/
+                               ▼
+            4. Issue Explicit Verdict:
                [APPROVE] | [REQUEST_CHANGES] | [COMMENT]
 ```
 
