@@ -58,11 +58,6 @@ flowchart TD
     G --> H["8. Two-Axis Code Review with AST Drift (/code-review -> docs/reviews/)"]
     H --> I["9. Visual Blast-Radius PR (/pr)"]
     I --> J["10. AST Drift Audit & Environment Tuning (/egm-drift-report, /retro)"]
-
-    style D fill:#f9d5e5,stroke:#333,stroke-width:2px
-    style E fill:#f9d5e5,stroke:#333,stroke-width:2px
-    style H fill:#d5e8d4,stroke:#333,stroke-width:2px
-    style J fill:#dae8fc,stroke:#333,stroke-width:2px
 ```
 
 ### The 10 Lifecycle Stages Explained Simply:
