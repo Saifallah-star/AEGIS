@@ -1,6 +1,6 @@
-# Agentic-Driven Development: Skills & Agents Backlog
+# AEGIS : Autonomous Engineering Guidance & Intelligence System
 
-A dedicated catalog and backlog for **AI Agent Skills, Subagent Orchestrations, and Autonomous Engineering Workflows** built for **Google Antigravity (`agy`) and Gemini CLI**.
+A protective layer for autonomous engineering: specifications, quality gates, adversarial reviews, and verification , built for **Google Antigravity (`agy`) and Gemini CLI**.
 
 <p align="center">
   <img src="docs/identity/ADD.png" alt="Agentic-Driven Development overview" width="300">
