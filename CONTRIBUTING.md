@@ -1,6 +1,5 @@
-# Contributing to Agentic-Driven Development
-
-Thank you for contributing to the **Agentic-Driven Development** repository! This project serves as a central hub, testing ground, and backlog for **AI Agent Skills, Autonomous Subagents, and Disciplined Engineering Workflows** designed for **Google Antigravity (`agy`) and the Gemini CLI**.
+# Contributing to AEGIS
+Thank you for contributing to the **AEGIS** repository! This project serves as a central hub, testing ground, and backlog for **AI Agent Skills, Autonomous Subagents, and Disciplined Engineering Workflows** designed for **Google Antigravity (`agy`) and the Gemini CLI**.
 
 ---
 
