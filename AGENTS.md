@@ -10,7 +10,7 @@
 - Never claim unverified test results.
 
 ## Delegation
-- Use `triage-agent` for evaluating issues/PRs, reproduction, and writing agent briefs.
+- Use `triage-agent` for evaluating issues/PRs, reproduction, and writing agent briefs. Triage MUST NOT write production code, fixes, or feature implementations; it must stop after applying the outcome or brief.
 - Use `architect` for requirements grilling, ADRs, system specs, and ticket DAG decomposition.
 - Use `researcher` for substantial read-only exploration and documentation lookup.
 - Use `implementer` for clearly scoped code changes and test-driven development (`tdd`).
